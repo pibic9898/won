@@ -60,7 +60,7 @@
   .status-dot.loading { background: var(--accent-amber); animation: pulse 1s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
   .card {
     background: var(--surface); border: 0.5px solid var(--border2);
     border-radius: 12px; padding: 1.2rem 1.4rem; position: relative; overflow: hidden;
@@ -241,7 +241,7 @@
           <thead>
             <tr>
               <th>날짜</th>
-              <th>기준</th>
+              
               <th>예금</th>
               <th>주식</th>
               <th>합계</th>
@@ -447,7 +447,6 @@ function renderTable() {
 
     return `<tr>
       <td>${s.date}</td>
-      <td><span class="badge ${badgeClass}">${s.base || '—'}</span></td>
       <td>${fmt(s.deposit)}</td>
       <td>${fmt(s.stock)}</td>
       <td style="color:var(--text);font-weight:500">${fmt(total)}</td>
