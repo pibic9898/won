@@ -274,11 +274,13 @@ let chart = null;
 let mode = 'total';
 
 function fmt(v) {
-  // 숫자가 없을 경우 처리
-  if (v === undefined || v === null) return '0';
-  
-  // 전체 숫자를 콤마 포함해서 출력하고, '원'만 클래스를 입힘
-  return Math.round(v).toLocaleString() + '원';
+  if (v >= 1e8) {
+    return (v / 1e8).toFixed(2) + '억';
+  }
+  if (v >= 1e4) {
+    return Math.round(v / 1e4).toLocaleString() + '만';
+  }
+  return Math.round(v).toLocaleString();
 }
 
 function setStatus(state, text) {
