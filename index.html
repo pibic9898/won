@@ -274,14 +274,11 @@ let chart = null;
 let mode = 'total';
 
 function fmt(v) {
-  if (v >= 1e8) {
-    // 억 단위일 경우 숫자와 '억'을 분리하여 '억'에 클래스 부여
-    return (v / 1e8).toFixed(2) + '억';
-  }
-  if (v >= 1e4) {
-    return Math.round(v / 1e4).toLocaleString() + '만';
-  }
-  return Math.round(v).toLocaleString();
+  // 숫자가 없을 경우 처리
+  if (v === undefined || v === null) return '0';
+  
+  // 전체 숫자를 콤마 포함해서 출력하고, '원'만 클래스를 입힘
+  return Math.round(v).toLocaleString() + '원';
 }
 
 function setStatus(state, text) {
