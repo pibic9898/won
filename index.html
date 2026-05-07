@@ -298,9 +298,26 @@ async function loadData() {
         const dv = cells[0].v;
         // 구글 시트 날짜는 "Date(yyyy,m,d)" 또는 문자열
         if (typeof dv === 'string' && dv.startsWith('Date(')) {
-          const parts = dv.replace('Date(','').replace(')','').split(',').map(Number);
-          const d = new Date(parts[0], parts[1], parts[2]);
-          date = d.toISOString().slice(0,10);
+        // 기존 코드 부분:
+// const parts = dv.replace('Date(','').replace(')','').split(',').map(Number);
+// const d = new Date(parts[0], parts[1], parts[2]);
+// date = d.toISOString().slice(0,10);
+
+// 수정된 코드:
+if (typeof dv === 'string' && dv.startsWith('Date(')) {
+    const parts = dv.replace('Date(', '').replace(')', '').split(',').map(Number);
+    // parts[0]=년, parts[1]=월, parts[2]=일
+    // Month는 0부터 시작하므로 그대로 사용하되, 
+    // 시간을 0시 0분 0초로 고정하여 생성합니다.
+    const d = new Date(parts[0], parts[1], parts[2], 0, 0, 0);
+    
+    // ISOString을 쓰면 UTC 시차 때문에 하루가 뒤로 갈 수 있으므로 
+    // 로컬 날짜를 직접 포맷팅합니다.
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    date = `${yyyy}-${mm}-${dd}`;
+}
         } else if (typeof dv === 'string') {
           date = dv.trim();
         }
