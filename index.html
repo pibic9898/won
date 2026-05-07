@@ -400,12 +400,12 @@ function render() {
     document.getElementById('cStockDate').textContent = last.date + ' 기준';
     delta(last.stock, prev?.stock, document.getElementById('cStockDelta'));
 
-    document.getElementById('cRatio').textContent = ((last.stock / total) * 100).toFixed(1) + '%';
+    document.getElementById('cRatio').innerHTML = ((last.stock / total) * 100).toFixed(1) + '%';
   }
 
   renderChart();
   renderTable();
-  document.getElementById('rowCount').textContent = list.length + '건';
+  document.getElementById('rowCount').innerHTML = list.length + '건';
 }
 
 function renderChart() {
