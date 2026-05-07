@@ -274,8 +274,13 @@ let chart = null;
 let mode = 'total';
 
 function fmt(v) {
-  if (v >= 1e8) return (v / 1e8).toFixed(2) + '<span class="unit-won">억</span>';
-  if (v >= 1e4) return Math.round(v / 1e4).toLocaleString() + '<span class="unit-won">만</span>';
+  if (v >= 1e8) {
+    // 억 단위일 경우 숫자와 '억'을 분리하여 '억'에 클래스 부여
+    return (v / 1e8).toFixed(2) + '<span class="unit-won">억</span>';
+  }
+  if (v >= 1e4) {
+    return Math.round(v / 1e4).toLocaleString() + '<span class="unit-won">만</span>';
+  }
   return Math.round(v).toLocaleString();
 }
 
